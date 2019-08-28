@@ -32,5 +32,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
+      # Unit Tests
       - run: yarn test
+ 
+      # Cypress Tests
+      - run: npm start & wait-on http://localhost:8080
+
+      - run: cypress run
