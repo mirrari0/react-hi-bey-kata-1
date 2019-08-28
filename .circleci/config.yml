@@ -46,5 +46,5 @@ jobs:
           background: true
       - run:
           name: Run E2E tests
-          command: cypress run --record
+          command: $(npm bin)/cypress run --record
           when: on_success
