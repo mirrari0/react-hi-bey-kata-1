@@ -36,6 +36,7 @@ jobs:
       - run: yarn test
  
       # Cypress Tests
+      - run: npm install -g wait-on
       - run: npm start & wait-on http://localhost:8080
 
       - run: cypress run
