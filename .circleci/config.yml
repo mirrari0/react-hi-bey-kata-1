@@ -36,15 +36,12 @@ jobs:
       - run: yarn test
  
       # Cypress Tests
-      #- run: npm install wait-on
-      #- run: npm start & wait-on http://localhost:8080
-      #- run: cypress run
-      - run: npm install cypress --save-dev
-      - run:
-          name: Background the app
-          command: yarn start
-          background: true
-      - run:
-          name: Run E2E tests
-          command: $(npm bin)/cypress run --record
-          when: on_success
+#      - run: npm install cypress --save-dev
+#      - run:
+#          name: Background the app
+#          command: yarn start
+#          background: true
+#      - run:
+#          name: Run E2E tests
+#          command: $(npm bin)/cypress run --record
+#          when: on_success
