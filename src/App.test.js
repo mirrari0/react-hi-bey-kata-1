@@ -27,6 +27,7 @@ describe('Render Page Elements', () => {
     it('Empty Vehicle Data Exists', () => {
         let table = app.find('#VehicleData');
         expect(table.type()).toEqual('table');
+        expect(app.state().isHidden).toBe(true);
         expect(app.find('th#Make').text()).toEqual('MAKE');
         expect(app.find('th#Model').text()).toEqual('MODEL');
         expect(app.find('th#ModelYear').text()).toEqual('MODEL YEAR');
@@ -37,5 +38,22 @@ describe('Render Page Elements', () => {
         expect(app.find('th#MakeCountry').text()).toEqual('MAKE COUNTRY');
         expect(app.find('th#EngineFuelType').text()).toEqual('ENGINE FUEL TYPE');
         expect(app.find('th#Count').text()).toEqual('COUNT');
+        expect(app.contains('tr#0')).toBe(false);
     });
+});
+
+describe('Request Vehicle Counts Button Functionality',() => {
+
+    var app;
+
+    beforeEach(() => {
+        app = mount(<App/>);
+    });
+
+    it('On Click, table is set to visible',()=>{
+        expect(app.contains('tr#0')).toBe(false);
+        app.find('button#RequestVehicleCounts').simulate('click');
+        app.update();
+        expect(app.state().isHidden).toBe(false);
+    })
 });

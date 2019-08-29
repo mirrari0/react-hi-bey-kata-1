@@ -1,0 +1,27 @@
+import React from 'react';
+
+
+let vehicleOne = ['Honda', 'Civic', '2016', 'Si', 'FWD', 'Manual', '2', 'Japan', 'Regular Unleaded', '282828'];
+let vehicleTwo = ['Honda', 'CR-V', '2016', 'Touring', 'AWD', 'Automatic', '4', 'Japan', 'Regular Unleaded', '142423'];
+let vehicleThree = ['Ford', 'Fusion', '2017', 'Coupe', 'FWD', 'Automatic', '4', 'United States', 'Regular Leaded', '1223345'];
+let vehicleFour = ['Chevy', 'S-10', '1999', 'Single Cab', 'RWD', 'Automatic', '2', 'United States', 'Regular Unleaded', '170000'];
+let vehicleFive = ['Chevy', 'Spark', '2018', 'Coupe', 'FWD', 'Automatic', '2', 'United States', 'Electricity', '12000'];
+
+var vehicles = [];
+
+export function getDataRows()
+{
+    return this.vehicles.map((vehicle, index) => {
+        return this.getDataRow(vehicle, index);
+    })
+}
+
+export function getDataRow(vehicle, index) {
+    return <tr key={index} id={''}>
+    </tr>
+}
+
+export function fetchData()
+{
+    this.vehicles = [this.vehicleOne, this.vehicleTwo, this.vehicleThree, this.vehicleFour, this.vehicleFive];
+}
