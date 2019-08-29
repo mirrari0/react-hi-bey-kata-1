@@ -3,13 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {mount} from 'enzyme';
 
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<App/>, div);
-    ReactDOM.unmountComponentAtNode(div);
-});
 
-describe('Request Vehicle Counts Button', () => {
+describe('Render Page Elements', () => {
 
     var app;
 
@@ -17,6 +12,12 @@ describe('Request Vehicle Counts Button', () => {
         app = mount(<App/>);
     });
 
+    it('renders without crashing', () => {
+        const div = document.createElement('div');
+        ReactDOM.render(<App/>, div);
+        ReactDOM.unmountComponentAtNode(div);
+    });
+    
     it('Request Vehicle Counts Button Exists', () => {
         let button = app.find('#RequestVehicleCounts');
         expect(button.type()).toEqual('button');
