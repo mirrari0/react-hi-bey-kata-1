@@ -6,7 +6,8 @@ class App extends Component {
     constructor () {
         super();
         this.state = {
-            isHidden: true
+            isHidden: true,
+            vehicles: []
         }
     }
 
@@ -22,7 +23,7 @@ class App extends Component {
             <div className="App">
                 <br/>
                 <button id={'RequestVehicleCounts'} name={"Request Vehicle Counts"} onClick={
-                    () => { this.setState({isHidden: false}) }
+                    () => { this.updateTableData() }
                 }>Request Vehicle Counts</button>
                 <br/>
                 <table id={'VehicleData'} style={this.state.isHidden ? { display: 'none' } : {} }>
@@ -31,13 +32,27 @@ class App extends Component {
                     {this.getTableHeaders()}
                     </tr>
                     </thead>
+                    <tbody>
+                    {this.getTableData()}
+                    </tbody>
                 </table>
             </div>
         );
     }
 
     updateTableData() {
+        this.setState({vehicles: [['Honda', 'Civic', '2016', 'Si', 'FWD', 'Manual', '2', 'Japan', 'Regular Unleaded', '282828']],
+            isHidden: false})
+    }
 
+    getTableData() {
+        return this.state.vehicles.map((item, index) => {
+            return <tr id={'row-'+index}>
+                {this.headerNames.map((dataType, dataIndex) => {
+                    return <td id={this.clearSpacesForId(dataType)+'-'+index}>{item[dataIndex]}</td>
+            })}
+            </tr>
+        });
     }
 
     getTableHeaders() {

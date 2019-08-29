@@ -38,7 +38,7 @@ describe('Render Page Elements', () => {
         expect(app.find('th#MakeCountry').text()).toEqual('MAKE COUNTRY');
         expect(app.find('th#EngineFuelType').text()).toEqual('ENGINE FUEL TYPE');
         expect(app.find('th#Count').text()).toEqual('COUNT');
-        expect(app.contains('tr#0')).toBe(false);
+        expect(app.find('#row-0').length).toEqual(0);
     });
 });
 
@@ -51,9 +51,35 @@ describe('Request Vehicle Counts Button Functionality',() => {
     });
 
     it('On Click, table is set to visible',()=>{
-        expect(app.contains('tr#0')).toBe(false);
+        expect(app.find('#row-0').length).toEqual(0);
         app.find('button#RequestVehicleCounts').simulate('click');
         app.update();
         expect(app.state().isHidden).toBe(false);
+    });
+
+    it('On Click, table is populated',()=>{
+        expect(app.find('#row-0').length).toEqual(0);
+        app.find('button#RequestVehicleCounts').simulate('click');
+        app.update();
+        expect(app.find('#row-0').type()).toEqual('tr');
+        let vehicle = app.state().vehicles[0];
+
+        validateTableData("Make", 0, vehicle[0], app);
+        validateTableData("Model", 0, vehicle[1], app);
+        validateTableData("ModelYear", 0, vehicle[2], app);
+        validateTableData("ModelBody", 0, vehicle[3], app);
+        validateTableData("ModelDrive", 0, vehicle[4], app);
+        validateTableData("ModelTransmissionType", 0, vehicle[5], app);
+        validateTableData("ModelDoors", 0, vehicle[6], app);
+        validateTableData("MakeCountry", 0, vehicle[7], app);
+        validateTableData("EngineFuelType", 0, vehicle[8], app);
+        validateTableData("Count", 0, vehicle[9], app);
     })
 });
+
+function validateTableData(column, row, expectedText, app) {
+    let cell = app.find('#'+column+'-'+row);
+    expect(cell.type()).toEqual('td');
+    expect(cell.text()).toEqual(expectedText);
+}
+
